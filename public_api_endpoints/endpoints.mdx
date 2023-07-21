@@ -1,0 +1,33 @@
+---
+sidebar_position: 1
+---
+
+# Fury Public Endpoints
+
+Fury Labs provides public API endpoints for the community to use for consuming and integrating with Fury(both mainnet and testnet), e.g. for setting up and syncing a new archive node or getting the latest block info.
+
+## Pruning API
+
+Pruning APIs provide information on the last 1000 blocks, and are useful for getting the latest state and most recent transactions.
+
+### Mainnet Pruning API Endpoints
+
+- api.fury.black - HTTP Rest Endpoint
+- rpc.fury.black - JSON-RPC Endpoint
+- grpc.fury.black - GRPC Endpoint
+- evm.fury.black - EVM JSON-RPC Endpoint
+
+### Testnet Pruning API Endpoints
+
+- api.testnet.fury.black - HTTP Rest Endpoint
+- rpc.testnet.fury.black - JSON-RPC Endpoint
+- grpc.testnet.fury.black - GRPC Endpoint
+- evm.testnet.fury.black - EVM JSON-RPC Endpoint
+
+## Default API Rate Limits
+
+To provide fair use of Fury's public API capacity, request rate limits are enforced for consumers of the following endpoints as below
+
+- Mainnet Archive API: 100 requests per 5 minutes
+- Mainnet Pruning API: 1200 requests per 5 minutes
+- Testnet Archive API: 500 requests per 5 minute period

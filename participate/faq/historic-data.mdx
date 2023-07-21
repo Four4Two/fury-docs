@@ -1,0 +1,30 @@
+# Accessing Historic Fury Data
+
+Fury Labs runs free, public archive nodes of all historic Fury versions.
+These endpoints are documented below with the relevant time frames for the data they contain:
+
+| Major Version | Fury Version | Chain ID     | Final Block Height   | Start Date | End Date   | Archive Endpoints                                                                                                        |
+| ------------- | ------------ | ------------ | -------------------- | ---------- | ---------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Fury 2        | v0.3.5       | fury-2       | 2598890<sup>\*</sup> | 2019-11-15 | 2020-06-10 | [API](https://api.fury-2.archives.fury.black/node_info)<br/>[RPC](https://rpc.fury-2.archives.fury.black/status)               |
+| Fury 3        | v0.10.0      | fury-3       | 1552962<sup>\*</sup> | 2020-06-10 | 2020-10-15 | [API](https://api.fury-3.archives.fury.black/node_info)<br/>[RPC](https://rpc.fury-3.archives.fury.black/status)               |
+| Fury 4        | v0.12.2      | fury-4       | 1267330<sup>\*</sup> | 2020-10-15 | 2021-03-04 | [API](https://api.fury-4.archives.fury.black/node_info)<br/>[RPC](https://rpc.fury-4.archives.fury.black/status)               |
+| Fury 6        | v0.12.4      | fury-6       | 334944<sup>\*</sup>  | 2021-03-05 | 2021-04-08 | [API](https://api.fury-6.archives.fury.black/node_info)<br/>[RPC](https://rpc.fury-6.archives.fury.black/status)               |
+| Fury 7        | v0.14.2      | fury-7       | 1878508<sup>\*</sup> | 2021-04-08 | 2021-08-30 | [API](https://api.fury-7.archives.fury.black/node_info)<br/>[RPC](https://rpc.fury-7.archives.fury.black/status)               |
+| Fury 8        | v0.15.2      | fury-8       | 1803249<sup>\*</sup> | 2021-08-31 | 2022-01-19 | [API](https://api.fury-8.archives.fury.black/node_info)<br/>[RPC](https://rpc.fury-8.archives.fury.black/status)               |
+| Fury 9        | v0.16.1      | fury-9       | 1610470<sup>\*</sup> | 2022-01-19 | 2022-05-25 | [API](https://api.fury-9.archives.fury.black/node_info)<br/>[RPC](https://rpc.fury-9.archives.fury.black/status)               |
+| Fury 10       | v0.17.7       | fury_2222-10 | 974569              | 2022-05-25 | 2022-08-04 | [API](https://api.data.fury.black/node_info)<br/>[RPC](https://rpc.data.fury.black/status)<br/>[EVM](https://evm.data.fury.black) |
+| Fury 10.1       | v0.18.1     | fury_2222-10 | 2098399              | 2022-08-04 | 2022-10-26 | [API](https://api.data.fury.black/node_info)<br/>[RPC](https://rpc.data.fury.black/status)<br/>[EVM](https://evm.data.fury.black) |
+| Fury 11       | v0.19.2      | fury_2222-10 | 3607199              | 2022-10-26 | 2023-02-26 | [API](https://api.data.fury.black/node_info)<br/>[RPC](https://rpc.data.fury.black/status)<br/>[EVM](https://evm.data.fury.black) |
+| Fury 12       | v0.21.1      | fury_2222-10 | 4832499              | 2023-02-26 | 2023-05-17 | [API](https://api.data.fury.black/node_info)<br/>[RPC](https://rpc.data.fury.black/status)<br/>[EVM](https://evm.data.fury.black) |
+| Fury 13       | v0.23.0      | fury_2222-10 |                      | 2023-05-17 | present    | [API](https://api.data.fury.black/node_info)<br/>[RPC](https://rpc.data.fury.black/status)<br/>[EVM](https://evm.data.fury.black) |
+
+<sup>*</sup> <i>block height was reset to 0 after these upgrades</i>
+<br />
+<br />
+
+As of the Fury 10 release, all upgrades are done as in-place software upgrades.
+The chain id no longer updates and the block height is never reset to 0, as was the case with all
+upgrades prior to Fury 10. Historical data for all upgrades since Fury 10 are available on the
+mainnet data node endpoints. Some data may need to be queried with the historic verison of the Fury CLI.
+
+Note that the Fury 5 upgrade was reverted. Those data are also available: [API](https://api.fury-5.archives.fury.black/node_info) & [RPC](https://rpc.fury-5.archives.fury.black/status)

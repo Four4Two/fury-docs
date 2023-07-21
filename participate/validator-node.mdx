@@ -1,0 +1,204 @@
+---
+sidebar_position: 1
+title: Run Validator Node
+---
+
+# Run Validator Node
+
+This is an updated guide on setting up a mainnet validator. Note that this is a minimal guide and does not cover more advanced topics like [sentry node architecture](https://github.com/stakefish/cosmos-validator-design) and [double signing protection](https://github.com/tendermint/tmkms). It is strongly recommended that any parties considering validating do additional research. If you have questions, please join the active conversation in the #validators thread of our [**Discord Channel**](https://discord.com/invite/kQzh3Uv).
+
+## Installing Fury
+
+### Prerequisites
+
+You should select an all-purpose server with at least 64GB of RAM, good connectivity, and a solid state drive with sufficient disk space. Storage requirements are discussed further in the section below. In addition, you’ll need to open **port 26656** to connect to the Fury peer-to-peer network. As the usage of the blockchain grows, the server requirements may increase as well, so you should have a plan for updating your server as well.
+
+### Storage
+
+The monthly storage requirements for a node are as follows. These are estimated values based on experience, but should serve as a good guide.
+
+- An archival node (`pruning = "nothing"`) grows at a rate of ~100 GB per month
+- A fully pruning node (`pruning = "everything"`) grows at a rate of ~5 GB per month
+- A default pruning node (`pruning = “default”`) grows at a rate of ~25 GB per month
+
+## Install Go
+
+Fury is built using Go and requires Go version 1.20. In this example, you will be installing Go on a fresh install of ubuntu 20.04.
+
+```bash
+# Update ubuntu
+sudo apt update
+sudo apt upgrade -y
+
+# Install packages necessary to run go and jq for pretty formatting command line outputs
+sudo apt install build-essential jq -y
+
+# Install git
+sudo apt install git
+
+# Install go
+wget https://dl.google.com/go/go1.20.linux-amd64.tar.gz (or latest version at https://golang.org/dl/)
+sudo tar -xvf go1.20.linux-amd64.tar.gz
+sudo mv go /usr/local
+
+# Updates environmental variables to include go
+cat <<EOF>> ~/.profile
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
+export GO111MODULE=on
+export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
+EOF
+source ~/.profile
+```
+
+To verify that Go is installed:
+
+```bash
+go version
+# Should return go version go1.20 linux/amd64
+```
+
+## Install Fury
+
+Install Fury using `git clone`. Note that version 0.23.0 is the correct version for mainnet.
+
+```bash
+git clone https://github.com/four4two/fury
+cd fury
+git checkout v0.23.0
+make install
+```
+
+To verify that fury is installed:
+
+```bash
+fury version --long
+# build_tags: netgo,ledger
+# commit: 1fed82f3c5c054900c4a992ad3be47c63f332d96
+# cosmos_sdk_version: v0.46.11
+# go: go version go1.20 darwin/arm64
+# name: fury
+# server_name: fury
+# version: 0.23.0
+```
+
+## Configuring Your Node
+
+Next, download the correct version of the fury node data and sync a node:
+
+https://quicksync.io/networks/fury.html
+
+Note that the current mainnet network is `fury_2222-10`.
+
+### Syncing Your Node
+
+To sync your node, you will use systemd, which manages the Fury daemon and automatically restarts it in case of failure. To use systemd, you will create a service file. Be sure to replace `<your_user>` with the user on your server:
+
+```bash
+sudo tee /etc/systemd/system/fury.service > /dev/null <<'EOF'
+[Unit]
+Description=Fury daemon
+After=network-online.target
+
+[Service]
+User=<your_user>
+ExecStart=/home/<your_user>/go/bin/fury start
+Restart=on-failure
+RestartSec=3
+LimitNOFILE=4096
+
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+To start syncing:
+
+```bash
+# Start the node
+sudo systemctl enable fury
+sudo systemctl start fury
+```
+
+To check on the status of syncing:
+
+```bash
+fury status --log_format json | jq '.sync_info'
+```
+
+This will give output like:
+
+```bash
+{
+  "latest_block_hash": "920E4D32F02CFF8064D26DD7D34C65DC623F4026C65C192BBCD7DBF19AFB5630",
+  "latest_app_hash": "442E7E55982109D9F73467EA0E374312B402AE620DEC81CB3441E949ED0D0A29",
+  "latest_block_height": "2437",
+  "latest_block_time": "2022-05-25T23:07:36.752766828Z",
+  "earliest_block_hash": "9D2AF876309BB9174604004A813DCFEE94F4947B08C5BB4C1A042F318488851E",
+  "earliest_app_hash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+  "earliest_block_height": "1",
+  "earliest_block_time": "2022-05-25T17:00:00Z",
+  "catching_up": true
+}
+```
+
+The main thing to watch is that the block height is increasing. Once you are caught up with the chain, `catching_up` will become false. At that point, you can start using your node to create a validator.
+
+To check the logs of the node:
+
+```bash
+sudo journalctl -u fury -f
+```
+
+## Creating a Validator
+
+First, create a wallet, which will give you a private key / public key pair for your node.
+
+```bash
+# Replace <your-key-name> with a name for your key that you will remember
+fury keys add <your-key-name>
+# To see a list of wallets on your node
+fury keys list
+```
+
+**Be sure to write down the mnemonic for your wallet and store it securely. Losing your mnemonic could result in the irrecoverable loss of FURY tokens.**
+
+To see the options when creating a validator:
+
+```bash
+fury tx staking create-validator -h
+```
+
+An example of creating a validator with 50FURY self-delegation and 10% commission:
+
+```bash
+# Replace <key_name> with the key you created previously
+fury tx staking create-validator \
+--amount=50000000ufury \
+--pubkey=$(fury tendermint show-validator) \
+--moniker="choose moniker" \
+--website="optional website for your validator" \
+--details="optional details for your validator" \
+--commission-rate="0.10" \
+--commission-max-rate="0.20" \
+--commission-max-change-rate="0.01" \
+--min-self-delegation="1" \
+--from=<your-key-name> \
+--chain-id=fury_2222-10 \
+--gas=auto \
+--gas-adjustment=1.4
+```
+
+To check on the status of your validator:
+
+```bash
+fury status --log_format json | jq '.ValidatorInfo'
+```
+
+After you have completed this guide, your validator should be up and ready to receive delegations. Note that only the top 100 validators by weighted stake (self-delegations + other delegations) are eligible for block rewards. To view the current validator list, checkout one of the Fury block explorers:
+
+- https://www.mintscan.io/fury
+- https://fury.bigdipper.live/
+- https://furyscan.com/
+
+If you have questions, please join the active conversation in the #validators thread of the [**Fury Discord Channel**](https://discord.com/invite/kQzh3Uv).

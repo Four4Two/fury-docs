@@ -1,0 +1,14 @@
+# `Issuance`
+
+1. **[Concepts](concepts)**
+2. **[State](state)**
+3. **[Messages](messages)**
+4. **[Events](events)**
+5. **[Params](params)**
+6. **[BeginBlock](begin_block)**
+
+## Abstract
+
+`x/issuance` is an implementation of a Cosmos SDK Module that allows for an issuer to control the minting and burning of an asset. The issuer is a white-listed address, which may be a multisig address, that can mint and burn coins of a particular denomination. The issuer is the only entity that can mint or burn tokens of that asset type (i.e., there is no outside inflation or deflation). Additionally, the issuer can place transfer-restrictions on addresses, which prevents addresses from transferring and holding tokens with the issued denomination. Coins are minted and burned at the discretion of the issuer, using `MsgIssueTokens` and `MsgRedeemTokens` transaction types, respectively.
+
+

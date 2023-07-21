@@ -1,0 +1,186 @@
+---
+sidebar_position: 1
+---
+
+# Getting Started
+
+This document will help you get a fury network up and running locally on your machine. It uses a CLI tool call `futool` that manages the configuration and initial setup of a network. The tool uses docker containers to run a Fury network with some optional configuration.
+
+You must have the following tools:
+
+1. [Go 1.20](https://golang.org/doc/install) - used to build & install `futool`
+2. [Docker](https://docs.docker.com/get-docker/) - used by `futool` to run local networks.
+
+## Ensure Go is setup in your PATH
+
+Once Go & Docker are installed, update your bash_profile to include the go path.
+
+```
+export PATH=/usr/local/go/bin:$PATH
+export PATH=$HOME/go/bin:$PATH
+export GOPATH=$HOME/go
+export GO111MODULE=on
+```
+
+Make sure to source your bash profile or restart it for the changes to take place.
+
+## Getting The Fury Repository & Development Tools
+
+Once you have the core tools installed & set up, its now time to get the following repositories from Github:
+
+- [fury](https://github.com/Four4Two/fury)
+  - Main Fury Repo that holds all modules
+- [futool](https://github.com/Four4Two/futool)
+  - Dev tools to interact with a Fury node
+
+## Set Up a Local Blockchain
+
+Now that you have set up all the tools & repositories in your local machine its finally time to set up a local blockchain.
+
+- Open a terminal and change into the `futool` directory.
+- Ensure Docker is running.
+- Run `make install` in your terminal which will install `futool` in your machine.
+- Run `futool testnet bootstrap`. By default, this command will initialize a docker container running the code of the current master branch of `fury`.
+
+Fury is now running on your local machine! The endpoints are publically exposed to your localhost:
+
+- RPC: http://localhost:26657
+- REST: http://localhost:1317
+- GRPC: http://localhost:9090
+- GRPC Websocket: http://localhost:9091
+- EVM JSON-RPC: http://localhost:8545
+- EVM Websocket: http://localhost:8546
+
+To interact with the network you can use `fury` CLI from your local machine by setting the `--node` flag:
+
+```
+fury --node http://localhost:26657 status
+```
+
+However, it is likely more convenient to run the `fury` CLI directly in the container. This ensures you are running a compatible version of the CLI and gives you access to the accounts configured in the local chain. To do this, add the following alias:
+
+```bash
+alias dfury='docker exec -it generated_furynode_1 fury'
+```
+
+Note that for some architectures or docker versions, the containers are generated with hyphens (`-`) instead of underscores (`_`).
+
+This alias execs into the container and runs `fury`. From there you have access to accounts.
+
+**NOTE**: Before Fury 9 (`v0.16`), the `fury` binary was two separate binaries. One for running the chain (`fud`) and a separate one for the cli (`kvcli`). If running older versions, you will need to use `kvcli` instead of `fury`.
+
+**Example**:
+Create a new account & fund it:
+
+```
+$ dfury keys add my-test-account
+
+- name: my-test-account
+  type: local
+  address: fury17fuj33p6y472j3kplsjdz966xlw6cdhwqzl8rl
+  pubkey: '{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"AnaP5cFfUDcK4jOGTLPCUPGqtijViYmCAd7XRg7XTQib"}'
+  mnemonic: ""
+
+
+**Important** write this mnemonic phrase in a safe place.
+It is the only way to recover your account if you ever forget your password.
+
+sign sausage monster group rain kite stage cat brush arm result chalk join hamster cup mass chuckle swing inflict april salmon deposit habit grid
+
+$ dfury tx bank send whale fury17fuj33p6y472j3kplsjdz966xlw6cdhwqzl8rl 1000000000ufury --gas-prices 0.01ufury -y
+```
+
+The above creates a new randomly generated account (`fury17fuj33p6y472j3kplsjdz966xlw6cdhwqzl8rl`) and funds it from the `whale` account.
+
+For a list of available accounts see [accounts.json](https://github.com/Four4Two/futool/blob/master/config/common/addresses.json), or the [keyring directory](https://github.com/Four4Two/futool/tree/master/config/templates/fury/master/initstate/.fury/keyring-test).
+
+---
+
+Additionally, you can just exec into a shell in the container. Futool manages everything with docker-compose and it exposes a command that will run docker-compose in the required location. The running configuration is in `futool/full_configs/docker-compose.yaml`.
+
+```
+$ futool testnet dc -- exec furynode bash
+
+bash-5.1# fury --help
+Daemon and CLI for the Fury blockchain.
+
+Usage:
+  fury [command]
+
+Available Commands:
+  add-genesis-account Add a genesis account to genesis.json
+  assert-invariants   Validates that the input genesis file is valid and invariants pass
+  collect-gentxs      Collect genesis txs and output a genesis.json file
+  config              Create or query an application CLI configuration file
+  debug               Tool for helping with debugging your application
+  export              Export state to JSON
+  gentx               Generate a genesis tx carrying a self delegation
+  help                Help about any command
+  init                Initialize private validator, p2p, genesis, and application configuration files
+  keys                Manage your application's keys
+  migrate             Migrate genesis from v0.17 to v0.18
+  query               Querying subcommands
+  start               Run the full node
+  status              Query remote node for status
+  tendermint          Tendermint subcommands
+  tx                  Transactions subcommands
+  validate-genesis    validates the genesis file at the default location or at the location passed as an arg
+  version             Print the application binary version information
+
+Flags:
+  -h, --help                help for fury
+      --home string         directory for config and data (default "/root/.fury")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "fury [command] --help" for more information about a command.
+```
+
+### Config Templates
+
+Config templates control the initial genesis file used to start the network and contain the . They also include all the account keys for accounts configured in the docker container.
+
+The available config templates can be found in [`config/templates/fury/`](https://github.com/Four4Two/futool/tree/master/config/templates/fury).
+
+By default, `futool` runs with the `master` config template which defaults to the `master` docker tag which is autodeployed whenever a commit is made to the master branch of `fury`. Occasionally, the configuration may become out of sync with what is currently on the master branch of fury. In these cases, it can be useful to use a template that uses a fixed docker tag with a working configuration:
+
+For example, running a network with v0.21 of `fury`:
+
+```
+$ futool testnet bootstrap --fury.configTemplate v0.21
+```
+
+This won't be subject to changes breaking changes of `fury` that have yet to be updated in `futool`'s master template.
+
+### Docker Image Tag
+
+Additionally, all fury confiug templates support overriding the docker image tag. A full list of available tags is available on [Docker Hub](https://hub.docker.com/r/fury/fury/tags).
+
+You can override the tag by setting the `FURY_TAG` environment variable. For instance running the master template with a fixed fury version of `v0.21.0`:
+
+```
+FURY_TAG=v0.21.0 futool testnet bootstrap
+```
+
+Note that at the time you're reading this, the master template's genesis and configuration may not be compatible with fury version v0.21.0.
+
+This is also useful for the development of `fury` itself. You can build a docker image, give it a tag like `fury/fury:TAG_HERE`, and then run a local network with the built image. There is a shortcut for this in the `fury` repo.
+
+```bash
+cd fury
+# the docker-build command builds the docker image and tags it `fury/fury:local`
+make docker-build
+# then you can run a network with the image you created
+FURY_TAG=local futool testnet bootstrap
+```
+
+## But wait! There's more!
+
+`futool` has a lot more functionality than simply running a single local fury network. Be sure to use its `--help` command and check out the repo's [README.md](https://github.com/Four4Two/futool/blob/master/README.md).
+
+It supports things like running two networks with an open IBC channel, chain upgrades, and more.
+
+Be sure to check out our guide on [developing for Fury's EVM](../ethereum/development).
+
+**Disclaimer**: `futool` is beta software. 😊 Some of its features may not always work as expected. Generally, the commands used in this guide are frequently used enough to be reliable. If you run into any problems, please reach out to us on [Discord](https://discord.com/invite/kQzh3Uv) or by [opening an issue](https://github.com/Four4Two/futool/issues/new).

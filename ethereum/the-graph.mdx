@@ -1,0 +1,63 @@
+---
+sidebar_position: 7
+title: The Graph
+---
+
+# The Graph
+
+## Important Note
+
+The Graph nodes provided by Fury is only a sandbox. The Graph admin endpoint is made public to allow anyone to be able to use it for testing. Projects should run their own Graph instances in production and avoid exposing the admin endpoint.
+
+## Fury Mainnet
+
+A hosted [The Graph](https://thegraph.com/en/) node is available to use on Fury EVM.
+
+- JSON-RPC Admin (Deploy subgraphs): https://the-graph-admin.fury.black
+- GraphQL HTTP Server (Query subgraphs): https://the-graph.fury.black
+- Query Metrics: https://the-graph-metrics.fury.black/graphql
+
+[An example deployed subgraph](https://the-graph.testnet.fury.black/subgraphs/name/fury/uniswap-v3/graphql) is available for V2 Uniswap on Fury EVM Testnet.
+
+## Deploying Subgraphs
+
+### Install graph-cli
+
+https://github.com/graphprotocol/graph-cli#installation
+
+### Write your subgraph
+
+See https://thegraph.com/docs/en/developer/create-subgraph-hosted/.
+
+You can also use an example project like [v2-uniswap](https://github.com/Uniswap/v2-subgraph).
+
+### Upgrade the manifest
+
+Update the `network` properties in the `subgraph.yaml` manifest file.
+The network name for Fury EVM is `fury-evm`.
+
+### Create your subgraph
+
+```bash
+graph create <subgraph-name> --node https://the-graph-admin.fury.black
+```
+
+### Deploy your subgraph
+
+```bash
+graph deploy <subgraph-name> --debug --ipfs https://api.thegraph.com/ipfs/ --node https://the-graph-admin.fury.black
+```
+
+Note that you can either use your own ipfs node here or `https://api.thegraph.com/ipfs/`.
+
+Once deployed, your graph should now be deployed and accessible via the GraphQL Server. It can be access at `https://the-graph.fury.black/subgraphs/name/<subgraph-name>/graphql`.
+
+## Testnet
+
+A hosted The Graph node is available on Fury EVM Testnet.
+
+- JSON-RPC Admin (Deploy subgraphs): https://the-graph-admin.testnet.fury.black
+- GraphQL HTTP Server (Query subgraphs): https://the-graph.testnet.fury.black
+- Metrics GraphQL (Subgraph indexing status): https://the-graph-metrics.testnet.fury.black
+
+The `network` name for Fury EVM Testnet is `fury-evm-testnet`.

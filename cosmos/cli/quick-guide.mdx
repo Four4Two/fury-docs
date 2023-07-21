@@ -1,0 +1,90 @@
+---
+title: Quick Guide
+sidebar_position: 1
+---
+
+# Quick Reference
+
+### Get a list of all keys
+
+```
+fury keys list
+```
+
+### Query Account
+
+```
+fury q account <fury-addr>
+```
+
+### View Staking Delegations
+
+```
+fury q staking delegations <fury-addr>
+```
+
+### Claim staking rewards
+
+```
+fury tx distribution withdraw-all-rewards --gas 650000 --gas-prices 0.01ufury --from <fury-addr or key name>
+```
+
+### Querying outstanding staking rewards
+
+```
+fury q distribution rewards <fury-addr>
+```
+
+### Claim staking from individual validator
+
+```
+fury tx distribution withdraw-rewards <fury-validator-addre (starts with furyvaloper)> --gas 650000 --gas-prices 0.01ufury --from <fury-addr or key name>
+```
+
+### Claiming FURY Delegator rewards (yielding JINX and JINXY)
+
+```
+fury tx incentive claim-delegator --multiplier jinx=large,jinxy=large --from <fury-addr or key name> --gas 800000 --gas-prices 0.01ufury
+```
+
+### Querying outstanding JINX rewards
+
+```
+fury q incentive rewards --type delegator --owner <fury-address>
+```
+
+### View JINX Incentives
+
+```
+fury q incentive rewards --type jinx --owner <fury-address>
+```
+
+### Claim JINX Incentives
+
+```
+fury tx incentive claim-jinx --multiplier jinx=large --multiplier ufury=large --from <fury-addr or key name> --gas 800000 --gas-prices 0.01ufury
+```
+
+### Send Coins
+
+```
+fury tx bank send <from> <to> <amount (100ufury for example)> --memo [memo] --gas-prices 0.01ufury
+```
+
+### Query Transaction Status Using TX Hash
+
+```
+fury q tx <tx_hash>
+```
+
+### Query Transactions Using events
+
+```
+fury q txs --events message.actions=swap_deposit
+```
+
+### Adding a Key to Ledger
+
+```
+fury keys add <key-name> --account <account-index> --legacy-hd-path --ledger
+```

@@ -1,0 +1,138 @@
+---
+sidebar_position: 6
+title: Contract Verification
+---
+
+# Contract Verification
+
+Once you have deployed your smart contracts, you can verify them on the
+[explorer]. The following guide uses [hardhat].
+
+## Via Flattened Source Code
+
+1. Use the following command to get a flattened source code of your smart contract:
+
+```bash
+npx hardhat flatten path/to/your/contract.sol
+```
+
+2. [Find your deployed contract on the Fury explorer and follow the steps to verify][blockscout-verify].
+   If your contract has constructor arguments, ensure that you provide them in
+   the form. If you do not already have an ABI-encoded version of it, you can
+   use this [online ABI encoding tool][abi-encoder] to manually
+   create it. Additional information about ABI-Encoded constructor arguments can
+   be found on the [Blockscout documentation][blockscout-abi-constructor].
+
+## Via Hardhat Verification Plugin
+
+You can also verify directly from your Hardhat development environment. This
+requires the [`hardhat-etherscan`][hardhat-etherscan] plugin. The Fury explorer uses [BlockScout]
+which is compatible with the Hardhat Etherscan plugin.
+
+1. [Install the Hardhat Etherscan plugin][hardhat-etherscan], ensuring
+   that the version is `v3.1.0` or higher.
+2. Ensure your `hardhat.config.js` file includes the following `etherscan`
+   configuration:
+
+```js title="hardhat.config.js"
+module.exports = {
+  networks: {
+    fury: {
+      url: 'https://evm.fury.black',
+    },
+  },
+  // highlight-start
+  etherscan: {
+    apiKey: {
+      fury: "api key is not required by the Fury explorer, but can't be empty",
+    },
+    customChains: [
+      {
+        network: 'fury',
+        chainId: 2222,
+        urls: {
+          apiURL: 'https://explorer.fury.black/api',
+          browserURL: 'https://explorer.fury.black',
+        },
+      },
+    ],
+  },
+  // highlight-end
+};
+```
+
+3. Verify that the custom network is configured correctly, by checking if fury
+   is listed in the supported custom networks.
+
+```bash
+$ npx hardhat verify --list-networks
+
+Networks supported by hardhat-etherscan:
+
+...
+
+Custom networks added by you or by plugins:
+
+╔═════════╤══════════╗
+║ network │ chain id ║
+╟─────────┼──────────╢
+║ fury    │ 2222     ║
+╚═════════╧══════════╝
+```
+
+4. Verify the contract with `npx hardhat verify`. This may take a few minutes.
+   The following is an example of verifying an WFURY contract.
+
+```bash
+$ npx hardhat verify --network fury 0x52A87b0703C65a4C30657e7badc808855711CdEc
+
+Nothing to compile
+Generating typings for: 0 artifacts in dir: typechain-types for target: ethers-v5
+Successfully generated 3 typings!
+Successfully generated 3 typings for external artifacts!
+Compiling 1 file with 0.8.9
+Successfully submitted source code for contract
+contracts/WFURY.sol:WFURY at 0x52A87b0703C65a4C30657e7badc808855711CdEc
+for verification on the block explorer. Waiting for verification result...
+
+Successfully verified contract WFURY on Etherscan.
+https://explorer.fury.black/address/0x52A87b0703C65a4C30657e7badc808855711CdEc#code
+```
+
+## Troubleshooting
+
+Here are some common errors and things to look out for when verifying your
+contracts.
+
+### `Bytecode does not match, please try again.`
+
+Ensure the following options are the exact same as what you deployed with, then
+try again.
+
+- Compiler version
+- Optimization runs
+- ABI-encoded constructur arguments
+
+### `There was an error compiling your contract: Multiple SPDX license identifiers found in source file`
+
+Flattening your contracts may sometimes merge multiple dependent contracts also
+with SPX identifiers (e.g. `// SPDX-License-Identifier: GPL-3.0`).
+
+Remove all SPDX comments except one in your flattened file and try verifying
+again. Alternatively, use the hardhat verification plugin to preserve license
+identifiers.
+
+## Resources
+
+- [Hardhat Verification Plugin][hardhat-etherscan]
+- [BlockScout Documentation][blockscout-docs]
+- [Online ABI encoding service][abi-encoder]
+
+[abi-encoder]: https://abi.hashex.org/
+[explorer]: https://explorer.fury.black
+[hardhat]: https://hardhat.org/
+[hardhat-etherscan]: https://hardhat.org/plugins/nomiclabs-hardhat-etherscan
+[blockscout]: https://github.com/blockscout/blockscout
+[blockscout-docs]: https://docs.blockscout.com/
+[blockscout-abi-constructor]: https://docs.blockscout.com/for-users/abi-encoded-constructor-arguments
+[blockscout-verify]: https://docs.blockscout.com/for-users/verifying-a-smart-contract

@@ -1,0 +1,24 @@
+.dividerColor {
+  border-color: #ff564f;
+}
+
+.linkBox {
+  margin-left: -0.4rem;
+  margin-right: -0.4rem;
+  text-align: center;
+  text-decoration: none;
+}
+
+.linkText {
+  border: 1px solid #ff564f;
+  border-right: none;
+  border-bottom: none;
+  border-left: none;
+  height: 90px;
+  margin-bottom: -8px;
+  padding-top: 20px;
+}
+
+.linkWrapper:hover {
+  text-decoration: none;
+}

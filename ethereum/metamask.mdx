@@ -1,0 +1,84 @@
+---
+sidebar_position: 2
+title: Connect to MetaMask
+---
+
+# Connect MetaMask
+
+Fury EVM is compatible with MetaMask, the most popular browser wallet.
+
+## Metamask config
+
+To access Fury EVM, you'll first need to add Fury's network configuration in MetaMask:
+
+### Mainnet
+
+- Network Name: Fury EVM Co-Chain
+- New RPC URL: https://evm.fury.black
+- Chain ID: 2222
+- Currency Symbol: FURY
+- Explorer URL: https://explorer.fury.black
+
+#### Verified Mainnet Contracts
+
+- Wrapped Fury (WFURY): `0xc86c7C0eFbd6A49B35E8714C5f59D99De09A225b` ([view on explorer](https://explorer.fury.black/address/0xc86c7C0eFbd6A49B35E8714C5f59D99De09A225b))
+- Multicall `0x7ED7bBd8C454a1B0D9EdD939c45a81A03c20131C` ([view on explorer](https://explorer.fury.black/address/0x7ED7bBd8C454a1B0D9EdD939c45a81A03c20131C))
+- Multicall2 `0x30A62aA52Fa099C4B227869EB6aeaDEda054d121` ([view on explorer](https://explorer.fury.black/address/0x30A62aA52Fa099C4B227869EB6aeaDEda054d121))
+
+#### Gnosis Safe
+
+- GnosisSafe `0xd9Db270c1B5E3Bd161E8c8503c55cEABeE709552` ([view on explorer](https://explorer.fury.black/address/0xd9Db270c1B5E3Bd161E8c8503c55cEABeE709552))
+- GnosisSafeL2 `0x3E5c63644E683549055b9Be8653de26E0B4CD36E` ([view on explorer](https://explorer.fury.black/address/0x3E5c63644E683549055b9Be8653de26E0B4CD36E))
+- SimulateTxAccessor `0x59AD6735bCd8152B84860Cb256dD9e96b85F69Da` ([view on explorer](https://explorer.fury.black/address/0x59AD6735bCd8152B84860Cb256dD9e96b85F69Da))
+- GnosisSafeProxyFactory `0xa6B71E26C5e0845f74c812102Ca7114b6a896AB2` ([view on explorer](https://explorer.fury.black/address/0xa6B71E26C5e0845f74c812102Ca7114b6a896AB2))
+- DefaultCallbackHandler `0x1AC114C2099aFAf5261731655Dc6c306bFcd4Dbd` ([view on explorer](https://explorer.fury.black/address/0x1AC114C2099aFAf5261731655Dc6c306bFcd4Dbd))
+- CompatibilityFallbackHandler `0xf48f2B2d2a534e402487b3ee7C18c33Aec0Fe5e4` ([view on explorer](https://explorer.fury.black/address/0xf48f2B2d2a534e402487b3ee7C18c33Aec0Fe5e4))
+- CreateCall `0x7cbB62EaA69F79e6873cD1ecB2392971036cFAa4` ([view on explorer](https://explorer.fury.black/address/0x7cbB62EaA69F79e6873cD1ecB2392971036cFAa4))
+- MultiSend `0xA238CBeb142c10Ef7Ad8442C6D1f9E89e07e7761` ([view on explorer](https://explorer.fury.black/address/0xA238CBeb142c10Ef7Ad8442C6D1f9E89e07e7761))
+- MultiSendCallOnly `0x40A2aCCbd92BCA938b02010E17A5b8929b49130D` ([view on explorer](https://explorer.fury.black/address/0x40A2aCCbd92BCA938b02010E17A5b8929b49130D))
+- SignMessageLib `0xA65387F16B013cf2Af4605Ad8aA5ec25a2cbA3a2` ([view on explorer](https://explorer.fury.black/address/0xA65387F16B013cf2Af4605Ad8aA5ec25a2cbA3a2))
+
+### Testnet
+
+- Network Name: Fury EVM Testnet
+- New RPC URL: https://evm.testnet.fury.black
+- Chain ID: 2221
+- Currency Symbol: FURY
+- Explorer URL: https://explorer.testnet.fury.black
+
+### Local
+
+- Network Name: Localhost 8545
+- New RPC URL: http://localhost:8545
+- Chain ID: 8888
+- Currency Symbol: FURY
+
+<img
+  src="https://user-images.githubusercontent.com/15370712/153627170-5715ece7-b3ea-4d26-b9b3-954bcc5660a4.png"
+  width="485"
+  height="391"
+/>
+
+## MetaMask account
+
+To send transactions from your account using MetaMask, import your Fury account to MetaMask via private key. You can do so by clicking on the profile picture image and then selecting 'Import Account'. From the 'Select Type' dropdown, select 'Private Key'.
+
+<img
+  src="https://user-images.githubusercontent.com/15370712/153627252-15ef6da4-383a-4198-8f32-348b69ff21b3.png"
+  width="239.3"
+  height="400"
+/>
+
+It's possible to generate your Fury EVM compatible private key using futool. From the `futool` repository:
+
+```bash
+# Start a local dockerized fury blockchain
+futool testnet bootstrap --fury.configTemplate evm
+
+# Add an alias to the dockerized fury blockchain
+alias dfury='docker exec -it generated_furynode_1 fury'
+
+# Export private key for named account 'validator'
+dfury keys unsafe-export-eth-key validator --keyring-backend test
+# 8A753652CB29472A01FAECF50EC1244C307B585466B2C52373539DA0100F3CED
+```

@@ -1,0 +1,17 @@
+.navigatorLinkWrapper {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.navigatorLinkWrapper:hover {
+  color: #e03a3a !important;
+  text-decoration: none;
+}
+
+.subtitle {
+  font-weight: 400;
+}
+
+.title {
+  font-weight: 700;
+}

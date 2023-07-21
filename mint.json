@@ -1,0 +1,257 @@
+{
+  "name": "Blackfury",
+  "logo": {
+    "light": "/assets/light.svg",
+    "dark": "/assets/dark.svg"
+  },
+  "favicon": "/assets/favicon.svg",
+  "colors": {
+    "primary": "#A1B659",
+    "light": "#E1EB55",
+    "dark": "#A1B659",
+    "ultraLight": "#EFF4DD",
+    "ultraDark": "#8D9F4C",
+    "background": {
+      "dark": "#0D1117"
+    },
+    "anchors": {
+      "from": "#A1B659",
+      "to": "#F8B7BD"
+    }
+  },
+  "topbarCtaButton": {
+    "name": "Open Wallet",
+    "url": "https://wallet.fury.black"
+  },
+  "topbarLinks": [
+    {
+      "name": "Explore Blackfury",
+      "url": "https://fury.black"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "Twitter",
+      "icon": "twitter",
+      "url": "https://twitter.com/blackfurychain"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Overview",
+      "pages": ["intro"]
+    },
+    {
+      "group": "Develop on Ethereum",
+      "pages": [
+        "ethereum/overview",
+        "ethereum/metamask",
+        "ethereum/development",
+        "ethereum/develop_contract_thirdweb",
+        "ethereum/develop_app_thirdweb",
+        "ethereum/the-graph",
+        "ethereum/contract_verification"
+      ]
+    },
+    {
+      "group": "Develop on Cosmos",
+      "pages": [
+        "cosmos/getting-started",
+        "cosmos/javascript-sdk",
+        "cosmos/building-modules",
+        {
+          "group": "Module Specs",
+          "pages": [
+            {  
+              "group": "Auction",
+              "pages": [
+                "cosmos/modules/auction/",
+                "cosmos/modules/auction/begin_block",
+                "cosmos/modules/auction/concepts",
+                "cosmos/modules/auction/events",
+                "cosmos/modules/auction/messages",
+                "cosmos/modules/auction/params",
+                "cosmos/modules/auction/state"
+              ]
+            },
+            {
+              "group": "BEP3",
+              "pages": [
+                "cosmos/modules/bep3/",
+                "cosmos/modules/bep3/begin_block",
+                "cosmos/modules/bep3/concepts",
+                "cosmos/modules/bep3/events",
+                "cosmos/modules/bep3/messages",
+                "cosmos/modules/bep3/params",
+                "cosmos/modules/bep3/state"
+              ]
+            },
+            {
+              "group": "CDP",
+              "pages": [
+                "cosmos/modules/cdp/",
+                "cosmos/modules/cdp/begin_block",
+                "cosmos/modules/cdp/concepts",
+                "cosmos/modules/cdp/events",
+                "cosmos/modules/cdp/messages",
+                "cosmos/modules/cdp/params",
+                "cosmos/modules/cdp/state"
+              ]
+            },
+            {
+              "group": "Committee",
+              "pages": [
+                "cosmos/modules/committee/",
+                "cosmos/modules/committee/begin_block",
+                "cosmos/modules/committee/concepts",
+                "cosmos/modules/committee/events",
+                "cosmos/modules/committee/messages",
+                "cosmos/modules/committee/params",
+                "cosmos/modules/committee/state"
+              ]
+            },
+            {
+              "group": "Jinx",
+              "pages": [
+                "cosmos/modules/Jinx/",
+                "cosmos/modules/Jinx/begin_block",
+                "cosmos/modules/Jinx/concepts",
+                "cosmos/modules/Jinx/events",
+                "cosmos/modules/Jinx/messages",
+                "cosmos/modules/Jinx/params",
+                "cosmos/modules/Jinx/state"
+              ]
+            },
+            {
+              "group": "Incentive",
+              "pages": [
+                "cosmos/modules/incentive/",
+                "cosmos/modules/incentive/begin_block",
+                "cosmos/modules/incentive/concepts",
+                "cosmos/modules/incentive/events",
+                "cosmos/modules/incentive/hooks",
+                "cosmos/modules/incentive/messages",
+                "cosmos/modules/incentive/params",
+                "cosmos/modules/incentive/state"
+              ]
+            },
+            {
+              "group": "Issuance",
+              "pages": [
+                "cosmos/modules/issuance/",
+                "cosmos/modules/issuance/begin_block",
+                "cosmos/modules/issuance/concepts",
+                "cosmos/modules/issuance/events",
+                "cosmos/modules/issuance/messages",
+                "cosmos/modules/issuance/params",
+                "cosmos/modules/issuance/state"
+              ]
+            },
+            {
+              "group": "Furydist",
+              "pages": [
+                "cosmos/modules/furydist/",
+                "cosmos/modules/furydist/begin_block",
+                "cosmos/modules/furydist/concepts",
+                "cosmos/modules/furydist/events",
+                "cosmos/modules/furydist/messages",
+                "cosmos/modules/furydist/params",
+                "cosmos/modules/furydist/state"
+              ]
+            },
+            {
+              "group": "Pricefeed",
+              "pages": [
+                "cosmos/modules/pricefeed/",
+                "cosmos/modules/pricefeed/concepts",
+                "cosmos/modules/pricefeed/end_block",
+                "cosmos/modules/pricefeed/events",
+                "cosmos/modules/pricefeed/messages",
+                "cosmos/modules/pricefeed/params",
+                "cosmos/modules/pricefeed/state"
+              ]
+            },
+            {
+              "group": "Swap",
+              "pages": [
+                "cosmos/modules/swap/",
+                "cosmos/modules/swap/concepts",
+                "cosmos/modules/swap/events",
+                "cosmos/modules/swap/messages",
+                "cosmos/modules/swap/params",
+                "cosmos/modules/swap/state"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "group": "CLI Docs",
+      "pages": [
+        "cosmos/cli/quick-guide",
+        {
+          "group": "Lend",
+          "pages": [
+            "cosmos/cli/Lend/jinx-borrow",
+            "cosmos/cli/Lend/jinx-deposit",
+            "cosmos/cli/Lend/jinx-repay",
+            "cosmos/cli/Lend/jinx-withdraw"
+          ]
+        },
+        {
+          "group": "Mint",
+          "pages": [
+            "cosmos/cli/Mint/cdp-create",
+            "cosmos/cli/Mint/cdp-deposit",
+            "cosmos/cli/Mint/cdp-draw",
+            "cosmos/cli/Mint/cdp-repay",
+            "cosmos/cli/Mint/cdp-withdraw"
+          ]
+        },
+        {
+          "group": "Swap",
+          "pages": [
+            "cosmos/cli/Swap/swap-deposit",
+            "cosmos/cli/Swap/swap-tokens",
+            "cosmos/cli/Swap/swap-withdraw"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Using Fury Public API Endpoints",
+      "pages": [
+        "public_api_endpoints/endpoints",
+        {
+          "group": "Participate in the Network",
+          "pages": [
+            "participate/validator-node",
+            "participate/node-configuration-faq",
+            "participate/auction-bot",
+            "participate/oracle-bot",
+            "participate/sentinel-bot",
+            {
+              "group": "FAQ",
+              "pages": [
+                "participate/faq/basics",
+                "participate/faq/earn",
+                "participate/faq/historic-data",
+                "participate/faq/support"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "footerSocials": {
+    "twitter": "https://twitter.com/blackfurychain"
+  },
+  "backgroundImage": "/assets/background.png",
+  "analytics": {
+    "ga4": {
+      "measurementId": "G-YQ9MDEKVXG"
+    }
+  }
+}
