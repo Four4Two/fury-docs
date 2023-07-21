@@ -7,7 +7,7 @@
 ###############################################################################
 
 # The network chain ID
-chain-id = "highbury_710-1"
+chain-id = "fury_2222-10"
 # The keyring's backend, where the keys are stored (os|file|kwallet|pass|test|memory)
 keyring-backend = "os"
 # CLI output format (text|json)

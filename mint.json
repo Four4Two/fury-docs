@@ -47,8 +47,6 @@
         "ethereum/overview",
         "ethereum/metamask",
         "ethereum/development",
-        "ethereum/develop_contract_thirdweb",
-        "ethereum/develop_app_thirdweb",
         "ethereum/the-graph",
         "ethereum/contract_verification"
       ]
