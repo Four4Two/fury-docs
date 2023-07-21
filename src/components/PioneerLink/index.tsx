@@ -9,7 +9,7 @@ export default function PioneerLink() {
       target="_blank"
     >
       <div className={classes.linkBox}>
-        <div className={classes.linkText}>Join the Fury Network</div>
+        <div className={classes.linkText}>Join the Blackfury Network</div>
       </div>
     </a>
   );
