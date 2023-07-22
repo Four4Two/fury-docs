@@ -63,7 +63,7 @@ Install Fury using `git clone`. Note that version 0.23.0 is the correct version 
 ```bash
 git clone https://github.com/four4two/fury
 cd fury
-git checkout v0.23.0
+git checkout v0.4.1
 make install
 ```
 
@@ -86,7 +86,7 @@ Next, download the correct version of the fury node data and sync a node:
 
 https://quicksync.io/networks/fury.html
 
-Note that the current mainnet network is `fury_2222-10`.
+Note that the current mainnet network is `highbury_710-1`.
 
 ### Syncing Your Node
 
@@ -182,7 +182,7 @@ fury tx staking create-validator \
 --commission-max-change-rate="0.01" \
 --min-self-delegation="1" \
 --from=<your-key-name> \
---chain-id=fury_2222-10 \
+--chain-id=highbury_710-1 \
 --gas=auto \
 --gas-adjustment=1.4
 ```
@@ -193,10 +193,8 @@ To check on the status of your validator:
 fury status --log_format json | jq '.ValidatorInfo'
 ```
 
-After you have completed this guide, your validator should be up and ready to receive delegations. Note that only the top 100 validators by weighted stake (self-delegations + other delegations) are eligible for block rewards. To view the current validator list, checkout one of the Fury block explorers:
+After you have completed this guide, your validator should be up and ready to receive delegations. Note that only the top 100 validators by weighted stake (self-delegations + other delegations) are eligible for block rewards. To view the current validator list, checkout one of the Furya explorers:
 
-- https://www.mintscan.io/fury
-- https://fury.bigdipper.live/
-- https://furyscan.com/
+- https://explorer.fury.black/
 
-If you have questions, please join the active conversation in the #validators thread of the [**Fury Discord Channel**](https://discord.com/invite/kQzh3Uv).
+If you have questions, please join the active conversation in the #validators thread of the [**Blackfury Discord Channel**](https://discord.gg/RpjX5C5YsB).
