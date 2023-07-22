@@ -224,6 +224,27 @@
       ]
     },
     {
+      "group": "Jinx Wallet",
+      "pages": [
+        {
+          "group": "Overview",
+          "pages": [
+            "ecosystem/jinx_wallet/what_is_jinx_army",
+            "ecosystem/jinx_wallet/blockchains"
+          ]
+        },
+        {
+          "group": "Features",
+          "pages": [
+            "ecosystem/jinx_wallet/trading_and_bridging",
+            "ecosystem/jinx_wallet/supported_on_off_ramps",
+            "ecosystem/jinx_wallet/liquidity_pools_and_farming",
+            "ecosystem/jinx_wallet/how_to_import_a_seed_phrase"
+          ]
+        }
+      ]
+    },
+    {
       "group": "Endpoints",
       "pages": [
         "public_api_endpoints/endpoints",

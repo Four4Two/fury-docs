@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "mdx-to-md": "^0.3.2"
+  }
+}
