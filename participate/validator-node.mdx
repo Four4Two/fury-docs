@@ -35,8 +35,8 @@ sudo apt install build-essential jq -y
 sudo apt install git
 
 # Install go
-wget https://dl.google.com/go/go1.20.linux-amd64.tar.gz (or latest version at https://golang.org/dl/)
-sudo tar -xvf go1.20.linux-amd64.tar.gz
+wget https://dl.google.com/go/go1.20.2.linux-amd64.tar.gz (or latest version at https://golang.org/dl/)
+sudo tar -xvf go1.20.2.linux-amd64.tar.gz
 sudo mv go /usr/local
 
 # Updates environmental variables to include go
@@ -53,12 +53,12 @@ To verify that Go is installed:
 
 ```bash
 go version
-# Should return go version go1.20 linux/amd64
+# Should return go version go1.20.2 linux/amd64
 ```
 
 ## Install Fury
 
-Install Fury using `git clone`. Note that version 0.23.0 is the correct version for mainnet.
+Install Fury using `git clone`. Note that version 0.4.1 is the correct version for mainnet.
 
 ```bash
 git clone https://github.com/four4two/fury
