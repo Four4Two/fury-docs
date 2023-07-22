@@ -3,7 +3,9 @@ sidebar_position: 1
 title: Run Validator Node
 ---
 
-This is an updated guide on setting up a mainnet validator. Note that this is a minimal guide and does not cover more advanced topics like [sentry node architecture](https://github.com/stakefish/cosmos-validator-design) and [double signing protection](https://github.com/tendermint/tmkms). It is strongly recommended that any parties considering validating do additional research. If you have questions, please join the active conversation in the #validator-feed thread of our [**Discord Channel**](https://discord.gg/RpjX5C5YsB).
+# Run Validator Node
+
+This is an updated guide on setting up a mainnet validator. Note that this is a minimal guide and does not cover more advanced topics like [sentry node architecture](https://github.com/stakefish/cosmos-validator-design) and [double signing protection](https://github.com/tendermint/tmkms). It is strongly recommended that any parties considering validating do additional research. If you have questions, please join the active conversation in the #validators thread of our [**Discord Channel**](https://discord.com/invite/kQzh3Uv).
 
 ## Installing Fury
 
@@ -35,8 +37,8 @@ sudo apt install build-essential jq -y
 sudo apt install git
 
 # Install go
-wget https://dl.google.com/go/go1.20.2.linux-amd64.tar.gz (or latest version at https://golang.org/dl/)
-sudo tar -xvf go1.20.2.linux-amd64.tar.gz
+wget https://dl.google.com/go/go1.20.linux-amd64.tar.gz (or latest version at https://golang.org/dl/)
+sudo tar -xvf go1.20.linux-amd64.tar.gz
 sudo mv go /usr/local
 
 # Updates environmental variables to include go
@@ -53,17 +55,17 @@ To verify that Go is installed:
 
 ```bash
 go version
-# Should return go version go1.20.2 linux/amd64
+# Should return go version go1.20 linux/amd64
 ```
 
 ## Install Fury
 
-Install Fury using `git clone`. Note that version 0.4.1 is the correct version for mainnet.
+Install Fury using `git clone`. Note that version 0.23.0 is the correct version for mainnet.
 
 ```bash
 git clone https://github.com/four4two/fury
 cd fury
-git checkout v0.4.1
+git checkout v0.23.0
 make install
 ```
 
@@ -193,8 +195,8 @@ To check on the status of your validator:
 fury status --log_format json | jq '.ValidatorInfo'
 ```
 
-After you have completed this guide, your validator should be up and ready to receive delegations. Note that only the top 100 validators by weighted stake (self-delegations + other delegations) are eligible for block rewards. To view the current validator list, checkout one of the Furya explorers:
+After you have completed this guide, your validator should be up and ready to receive delegations. Note that only the top 100 validators by weighted stake (self-delegations + other delegations) are eligible for block rewards. To view the current validator list, checkout the Furya explorer:
 
 - https://explorer.fury.black/
 
-If you have questions, please join the active conversation in the #validators thread of the [**Blackfury Discord Channel**](https://discord.gg/RpjX5C5YsB).
+If you have questions, please join the active conversation in the #validators thread of the [**Blackury Discord Channel**](https://discord.com/invite/QzaJtR77WB).

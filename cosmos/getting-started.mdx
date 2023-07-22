@@ -140,10 +140,10 @@ The available config templates can be found in [`config/templates/fury/`](https:
 
 By default, `futool` runs with the `master` config template which defaults to the `master` docker tag which is autodeployed whenever a commit is made to the master branch of `fury`. Occasionally, the configuration may become out of sync with what is currently on the master branch of fury. In these cases, it can be useful to use a template that uses a fixed docker tag with a working configuration:
 
-For example, running a network with v0.21 of `fury`:
+For example, running a network with v0.4.1 of `fury`:
 
 ```
-$ futool testnet bootstrap --fury.configTemplate v0.21
+$ futool testnet bootstrap --fury.configTemplate v0.4.1
 ```
 
 This won't be subject to changes breaking changes of `fury` that have yet to be updated in `futool`'s master template.
@@ -152,13 +152,13 @@ This won't be subject to changes breaking changes of `fury` that have yet to be 
 
 Additionally, all fury confiug templates support overriding the docker image tag. A full list of available tags is available on [Docker Hub](https://hub.docker.com/r/fury/fury/tags).
 
-You can override the tag by setting the `FURY_TAG` environment variable. For instance running the master template with a fixed fury version of `v0.21.0`:
+You can override the tag by setting the `FURY_TAG` environment variable. For instance running the master template with a fixed fury version of `v0.4.1`:
 
 ```
-FURY_TAG=v0.21.0 futool testnet bootstrap
+FURY_TAG=v0.4.1 futool testnet bootstrap
 ```
 
-Note that at the time you're reading this, the master template's genesis and configuration may not be compatible with fury version v0.21.0.
+Note that at the time you're reading this, the master template's genesis and configuration may not be compatible with fury version v0.4.1.
 
 This is also useful for the development of `fury` itself. You can build a docker image, give it a tag like `fury/fury:TAG_HERE`, and then run a local network with the built image. There is a shortcut for this in the `fury` repo.
 
