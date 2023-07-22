@@ -3,8 +3,6 @@ sidebar_position: 6
 title: Contract Verification
 ---
 
-# Contract Verification
-
 Once you have deployed your smart contracts, you can verify them on the
 [explorer]. The following guide uses [hardhat].
 
@@ -44,7 +42,7 @@ module.exports = {
   // highlight-start
   etherscan: {
     apiKey: {
-      fury: "api key is not required by the Fury explorer, but can't be empty",
+      fury: "api key is not required by the Blackfury explorer, but can't be empty",
     },
     customChains: [
       {
@@ -61,7 +59,7 @@ module.exports = {
 };
 ```
 
-3. Verify that the custom network is configured correctly, by checking if fury
+3. Verify that the custom network is configured correctly, by checking if Blackfury
    is listed in the supported custom networks.
 
 ```bash
@@ -73,11 +71,12 @@ Networks supported by hardhat-etherscan:
 
 Custom networks added by you or by plugins:
 
-╔═════════╤══════════╗
-║ network │ chain id ║
-╟─────────┼──────────╢
-║ fury    │ 710     ║
-╚═════════╧══════════╝
++----------+----------+
+| Network  | Chain ID |
++----------+----------+
+| Highbury |   710    |
++----------+----------+
+
 ```
 
 4. Verify the contract with `npx hardhat verify`. This may take a few minutes.

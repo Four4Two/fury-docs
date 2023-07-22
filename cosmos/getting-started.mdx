@@ -1,14 +1,13 @@
 ---
 sidebar_position: 1
+title: Getting Started
 ---
-
-# Getting Started
 
 This document will help you get a Blackfury Network up and running locally on your machine. It uses a CLI tool call `futool` that manages the configuration and initial setup of a network. The tool uses docker containers to run a Blackfury Network with some optional configuration.
 
 You must have the following tools:
 
-1. [Go 1.20](https://golang.org/doc/install) - used to build & install `futool`
+1. [Go 1.20.2](https://golang.org/doc/install) - used to build & install `futool`
 2. [Docker](https://docs.docker.com/get-docker/) - used by `futool` to run local networks.
 
 ## Ensure Go is setup in your PATH
@@ -24,14 +23,12 @@ export GO111MODULE=on
 
 Make sure to source your bash profile or restart it for the changes to take place.
 
-## Getting The Fury Repository & Development Tools
+## Getting The Blackfury Repository & Development Tools
 
 Once you have the core tools installed & set up, its now time to get the following repositories from Github:
 
-- [fury](https://github.com/Four4Two/fury)
-  - Main Fury Repo that holds all modules
-- [futool](https://github.com/Four4Two/futool)
-  - Dev tools to interact with a Fury node
+- [fury](https://github.com/Four4Two/fury) - Main Blackfury Repo that holds all modules
+- [futool](https://github.com/Four4Two/futool) - Dev tools to interact with a Blackfury node
 
 ## Set Up a Local Blockchain
 
@@ -42,7 +39,7 @@ Now that you have set up all the tools & repositories in your local machine its 
 - Run `make install` in your terminal which will install `futool` in your machine.
 - Run `futool testnet bootstrap`. By default, this command will initialize a docker container running the code of the current master branch of `fury`.
 
-Fury is now running on your local machine! The endpoints are publically exposed to your localhost:
+The `fury` is now running on your local machine! The endpoints are publically exposed to your localhost:
 
 - RPC: http://localhost:26657
 - REST: http://localhost:1317
@@ -67,13 +64,11 @@ Note that for some architectures or docker versions, the containers are generate
 
 This alias execs into the container and runs `fury`. From there you have access to accounts.
 
-**NOTE**: Before Fury 9 (`v0.16`), the `fury` binary was two separate binaries. One for running the chain (`fud`) and a separate one for the cli (`kvcli`). If running older versions, you will need to use `kvcli` instead of `fury`.
-
 **Example**:
 Create a new account & fund it:
 
 ```
-$ dfury keys add my-test-account
+$ fury keys add my-test-account
 
 - name: my-test-account
   type: local
@@ -87,7 +82,7 @@ It is the only way to recover your account if you ever forget your password.
 
 sign sausage monster group rain kite stage cat brush arm result chalk join hamster cup mass chuckle swing inflict april salmon deposit habit grid
 
-$ dfury tx bank send whale fury17fuj33p6y472j3kplsjdz966xlw6cdhwqzl8rl 1000000000ufury --gas-prices 0.01ufury -y
+$ fury tx bank send whale fury17fuj33p6y472j3kplsjdz966xlw6cdhwqzl8rl 1000000000ufury --gas-prices 0.01ufury -y
 ```
 
 The above creates a new randomly generated account (`fury17fuj33p6y472j3kplsjdz966xlw6cdhwqzl8rl`) and funds it from the `whale` account.
@@ -102,7 +97,7 @@ Additionally, you can just exec into a shell in the container. Futool manages ev
 $ futool testnet dc -- exec furynode bash
 
 bash-5.1# fury --help
-Daemon and CLI for the Fury blockchain.
+Daemon and CLI for the Blackfury blockchain.
 
 Usage:
   fury [command]
@@ -181,6 +176,6 @@ FURY_TAG=local futool testnet bootstrap
 
 It supports things like running two networks with an open IBC channel, chain upgrades, and more.
 
-Be sure to check out our guide on [developing for Fury's EVM](../ethereum/development).
+Be sure to check out our guide on [developing for Blackfury's EVM](../ethereum/development).
 
-**Disclaimer**: `futool` is beta software. 😊 Some of its features may not always work as expected. Generally, the commands used in this guide are frequently used enough to be reliable. If you run into any problems, please reach out to us on [Discord](https://discord.com/invite/kQzh3Uv) or by [opening an issue](https://github.com/Four4Two/futool/issues/new).
+**Disclaimer**: `futool` is beta software. 😊 Some of its features may not always work as expected. Generally, the commands used in this guide are frequently used enough to be reliable. If you run into any problems, please reach out to us on [Discord](https://discord.gg/QzaJtR77WB) or by [opening an issue](https://github.com/Four4Two/futool/issues/new).

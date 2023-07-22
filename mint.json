@@ -34,6 +34,11 @@
       "name": "Twitter",
       "icon": "twitter",
       "url": "https://twitter.com/blackfurychain"
+    },
+    {
+      "name": "REST API Specs",
+      "icon": "plug",
+      "url": "https://swagger.fury.black"
     }
   ],
   "navigation": [
@@ -57,6 +62,7 @@
         "cosmos/getting-started",
         "cosmos/javascript-sdk",
         "cosmos/building-modules",
+        "cosmos/protobuf",
         {
           "group": "Module Specs",
           "pages": [
@@ -218,7 +224,7 @@
       ]
     },
     {
-      "group": "Using Fury Public API Endpoints",
+      "group": "Endpoints",
       "pages": [
         "public_api_endpoints/endpoints",
         {
@@ -234,7 +240,6 @@
               "pages": [
                 "participate/faq/basics",
                 "participate/faq/earn",
-                "participate/faq/historic-data",
                 "participate/faq/support"
               ]
             }

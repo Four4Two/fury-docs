@@ -3,13 +3,11 @@ sidebar_position: 7
 title: The Graph
 ---
 
-# The Graph
-
 ## Important Note
 
-The Graph nodes provided by Fury is only a sandbox. The Graph admin endpoint is made public to allow anyone to be able to use it for testing. Projects should run their own Graph instances in production and avoid exposing the admin endpoint.
+The Graph nodes provided by Blackfury is only a sandbox. The Graph admin endpoint is made public to allow anyone to be able to use it for testing. Projects should run their own Graph instances in production and avoid exposing the admin endpoint.
 
-## Fury Mainnet
+## Blackfury Mainnet
 
 A hosted [The Graph](https://thegraph.com/en/) node is available to use on Fury EVM.
 
@@ -17,7 +15,7 @@ A hosted [The Graph](https://thegraph.com/en/) node is available to use on Fury 
 - GraphQL HTTP Server (Query subgraphs): https://the-graph.fury.black
 - Query Metrics: https://the-graph-metrics.fury.black/graphql
 
-[An example deployed subgraph](https://the-graph.testnet.fury.black/subgraphs/name/fury/uniswap-v3/graphql) is available for V2 Uniswap on Fury EVM Testnet.
+[An example deployed subgraph](https://the-graph.testnet.fury.black/subgraphs/name/fury/uniswap-v3/graphql) is available for V2 Uniswap on Blackfury EVM Testnet.
 
 ## Deploying Subgraphs
 
@@ -34,7 +32,7 @@ You can also use an example project like [v2-uniswap](https://github.com/Uniswap
 ### Upgrade the manifest
 
 Update the `network` properties in the `subgraph.yaml` manifest file.
-The network name for Fury EVM is `fury-evm`.
+The network name for Blackfury EVM is `blackfury`.
 
 ### Create your subgraph
 
@@ -54,10 +52,10 @@ Once deployed, your graph should now be deployed and accessible via the GraphQL 
 
 ## Testnet
 
-A hosted The Graph node is available on Fury EVM Testnet.
+A hosted The Graph node is available on Blackfury EVM Testnet.
 
 - JSON-RPC Admin (Deploy subgraphs): https://the-graph-admin.testnet.fury.black
 - GraphQL HTTP Server (Query subgraphs): https://the-graph.testnet.fury.black
 - Metrics GraphQL (Subgraph indexing status): https://the-graph-metrics.testnet.fury.black
 
-The `network` name for Fury EVM Testnet is `fury-evm-testnet`.
+The `network` name for Blackfury EVM Testnet is `blackfury-testnet`.
