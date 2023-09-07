@@ -5,17 +5,17 @@ title: The Graph
 
 ## Important Note
 
-The Graph nodes provided by Blackfury is only a sandbox. The Graph admin endpoint is made public to allow anyone to be able to use it for testing. Projects should run their own Graph instances in production and avoid exposing the admin endpoint.
+The Graph nodes provided by Highbury is only a sandbox. The Graph admin endpoint is made public to allow anyone to be able to use it for testing. Projects should run their own Graph instances in production and avoid exposing the admin endpoint.
 
-## Blackfury Mainnet
+## Highbury Mainnet
 
 A hosted [The Graph](https://thegraph.com/en/) node is available to use on Fury EVM.
 
-- JSON-RPC Admin (Deploy subgraphs): https://the-graph-admin.fury.black
-- GraphQL HTTP Server (Query subgraphs): https://the-graph.fury.black
-- Query Metrics: https://the-graph-metrics.fury.black/graphql
+- JSON-RPC Admin (Deploy subgraphs): https://the-graph-admin.furya.io
+- GraphQL HTTP Server (Query subgraphs): https://the-graph.furya.io
+- Query Metrics: https://the-graph-metrics.furya.io/graphql
 
-[An example deployed subgraph](https://the-graph.testnet.fury.black/subgraphs/name/fury/uniswap-v3/graphql) is available for V2 Uniswap on Blackfury EVM Testnet.
+[An example deployed subgraph](https://the-graph.testnet.furya.io/subgraphs/name/fury/uniswap-v3/graphql) is available for V2 Uniswap on Highbury EVM Testnet.
 
 ## Deploying Subgraphs
 
@@ -32,30 +32,30 @@ You can also use an example project like [v2-uniswap](https://github.com/Uniswap
 ### Upgrade the manifest
 
 Update the `network` properties in the `subgraph.yaml` manifest file.
-The network name for Blackfury EVM is `blackfury`.
+The network name for Highbury EVM is `Highbury`.
 
 ### Create your subgraph
 
 ```bash
-graph create <subgraph-name> --node https://the-graph-admin.fury.black
+graph create <subgraph-name> --node https://the-graph-admin.furya.io
 ```
 
 ### Deploy your subgraph
 
 ```bash
-graph deploy <subgraph-name> --debug --ipfs https://api.thegraph.com/ipfs/ --node https://the-graph-admin.fury.black
+graph deploy <subgraph-name> --debug --ipfs https://api.thegraph.com/ipfs/ --node https://the-graph-admin.furya.io
 ```
 
 Note that you can either use your own ipfs node here or `https://api.thegraph.com/ipfs/`.
 
-Once deployed, your graph should now be deployed and accessible via the GraphQL Server. It can be access at `https://the-graph.fury.black/subgraphs/name/<subgraph-name>/graphql`.
+Once deployed, your graph should now be deployed and accessible via the GraphQL Server. It can be access at `https://the-graph.furya.io/subgraphs/name/<subgraph-name>/graphql`.
 
 ## Testnet
 
-A hosted The Graph node is available on Blackfury EVM Testnet.
+A hosted The Graph node is available on Highbury EVM Testnet.
 
-- JSON-RPC Admin (Deploy subgraphs): https://the-graph-admin.testnet.fury.black
-- GraphQL HTTP Server (Query subgraphs): https://the-graph.testnet.fury.black
-- Metrics GraphQL (Subgraph indexing status): https://the-graph-metrics.testnet.fury.black
+- JSON-RPC Admin (Deploy subgraphs): https://the-graph-admin.testnet.furya.io
+- GraphQL HTTP Server (Query subgraphs): https://the-graph.testnet.furya.io
+- Metrics GraphQL (Subgraph indexing status): https://the-graph-metrics.testnet.furya.io
 
-The `network` name for Blackfury EVM Testnet is `blackfury-testnet`.
+The `network` name for Highbury EVM Testnet is `Highbury-testnet`.
